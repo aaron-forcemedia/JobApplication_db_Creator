@@ -27,6 +27,7 @@ C:\Users\aaron\OneDrive\Desktop\CodeLouisville3\ApplicationDemo.Domain\obj\Debug
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.deps.json
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.runtimeconfig.json
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.dll
+C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ref\ApplicationDemo.Domain.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.pdb
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.AssemblyInfoInputs.cache
@@ -36,4 +37,3 @@ C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ref\ApplicationDemo.Domain.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.pdb
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.genruntimeconfig.cache
-C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\bin\Debug\net6.0\ref\ApplicationDemo.Domain.dll

@@ -124,6 +124,7 @@ C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ApplicationDemo.UI.deps.json
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ApplicationDemo.UI.runtimeconfig.json
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ApplicationDemo.UI.dll
+C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ref\ApplicationDemo.UI.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ApplicationDemo.UI.pdb
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\Humanizer.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
@@ -181,4 +182,3 @@ C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\obj\Debug\net6.0\
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\obj\Debug\net6.0\ref\ApplicationDemo.UI.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\obj\Debug\net6.0\ApplicationDemo.UI.pdb
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\obj\Debug\net6.0\ApplicationDemo.UI.genruntimeconfig.cache
-C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.UI\bin\Debug\net6.0\ref\ApplicationDemo.UI.dll
