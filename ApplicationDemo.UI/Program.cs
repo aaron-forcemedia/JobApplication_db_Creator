@@ -99,6 +99,11 @@ namespace ApplicationDemo.UI
                 {
                     quit = true;
                 }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid Selection, Please try again.");
+                }
             }
         }
 
