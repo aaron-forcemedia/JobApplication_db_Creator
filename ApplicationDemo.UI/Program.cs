@@ -155,9 +155,9 @@ namespace ApplicationDemo.UI
             {
                 Console.WriteLine("Name: ");
                 newApplicant.Name = Console.ReadLine();
-                if (applicantList.Any(a => a.Name.ToUpper() == newApplicant.Name.ToUpper()))
+                if (applicantList.Any(a => a.Name.ToUpper() == newApplicant.Name.ToUpper()) || string.IsNullOrWhiteSpace(newApplicant.Name))
                 {
-                    Console.WriteLine("Name already exists. Input another name:");
+                    Console.WriteLine("Invalid Input. Try another name:");
                     nameValid = false;
                 }
                 else
@@ -247,21 +247,21 @@ namespace ApplicationDemo.UI
         /// </summary>
         private static void AddJob()
         {
-            List<JobSkills> addSkill = _context.JobSkills.ToList();
             bool quit = false;
             while (!quit)
             {
                 bool jobValid = false;
                 while (!jobValid)
                 {
-                    string job = "";
                     Console.Clear();
                     ViewJobSkills();
                     Console.WriteLine("Add a job to list: ");
-                    JobSkills jobtoadd = new JobSkills();
-                    job = Console.ReadLine();
+                    JobSkills jobToAdd = new JobSkills();
+                    jobToAdd.SkillName = Console.ReadLine();
                     
-                    if (addSkill.Any(a => a.SkillName.ToUpper() == job.ToUpper()) || string.IsNullOrWhiteSpace(job))
+                    List<JobSkills> addSkill = _context.JobSkills.Where(a => a.SkillName.ToUpper() == jobToAdd.SkillName.ToUpper()).ToList();
+
+                    if (addSkill.Count > 0 || string.IsNullOrWhiteSpace(jobToAdd.SkillName))
                     {
                         Console.WriteLine("Name already exists or Invalid. Press Enter to continue..");
                         Console.ReadLine();
@@ -269,9 +269,7 @@ namespace ApplicationDemo.UI
                     }
                     else
                     {
-                        JobSkills jobToAdd = new JobSkills();
-                        jobToAdd.SkillName = job;
-                        Console.WriteLine($"{job} added to list");
+                        Console.WriteLine($"{jobToAdd.SkillName} added to list");
                         _context.JobSkills.Add(jobToAdd);
                         _context.SaveChanges();
                         jobValid = true;
