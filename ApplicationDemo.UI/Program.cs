@@ -19,8 +19,10 @@ namespace ApplicationDemo.UI
 
             //Menu Options 
             bool quit = false;
+            
             while (!quit)
             {
+                string menuOption = "";
                 Console.WriteLine("|   <E>nter Applicant     |");
                 Console.WriteLine("|   <R>emove Applicant    |");
                 Console.WriteLine("|   <L>ist Applicants     |");
@@ -29,7 +31,7 @@ namespace ApplicationDemo.UI
                 Console.WriteLine("|   <A>dd Skills          |");
                 Console.WriteLine("|   Re<m>ove Skills       |");
                 Console.WriteLine("|   <Q>uit                |");
-                string menuOption = Console.ReadLine();
+                menuOption = Console.ReadLine();
                 List<Applicant> applications = _context.Applicants.ToList();
                 if (menuOption.ToUpper() == "E")
                 {
@@ -39,21 +41,40 @@ namespace ApplicationDemo.UI
                 if (menuOption.ToUpper() == "L")
                 {
                     ListApplicants();
+                    Console.WriteLine("Press Any Key to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
                 if (menuOption.ToUpper() == "A")
                 {
                     Console.Clear();
                     ViewJobSkills();
-                    AddJob();
+                    Console.WriteLine();
+                    Console.WriteLine("Add a job to list (Or just Press Enter to Exit to menu): ");
+                    string jobString = Console.ReadLine();
+                    if (jobString != "")
+                    {
+                        AddJob(jobString);
+                    }
+                    Console.Clear();
                 }
                 if (menuOption.ToUpper() == "V")
                 {
                     Console.Clear();
                     ListApplicants();
-                    Console.WriteLine("Enter a Name to view");
-                    string queryName = Console.ReadLine();
-                    Console.Clear();
-                    GetInfo(queryName.ToUpper());
+                    if (applications.Count > 0)
+                    {
+                        Console.WriteLine("Enter a Name to view");
+                        string queryName = Console.ReadLine();
+                        Console.Clear();
+                        GetInfo(queryName.ToUpper());
+                    }
+                    else
+                    {
+                        Console.WriteLine("There are currently no applicants to select. Please hit any key to return to menu.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
                 }
                 if (menuOption.ToUpper() == "R")
                 {
@@ -61,15 +82,18 @@ namespace ApplicationDemo.UI
                     ListApplicants();
                     if (applications.Count > 0)
                     {
-                        Console.WriteLine("Enter a Name to remove");
+                        Console.WriteLine("Enter a Name to remove (Or just Press Enter return to menu)");
                         string removeName = Console.ReadLine();
                         Console.Clear();
-                        RemoveApplicant(removeName.ToUpper());
+                        if (removeName != "")
+                        {
+                            RemoveApplicant(removeName.ToUpper());
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("No applicants left to remove. Press Enter to return to menut.");
-                        Console.ReadLine();
+                        Console.WriteLine("No applicants left to remove. Press any key to return to menu");
+                        Console.ReadKey();
                         Console.Clear();
                     }
                 }
@@ -99,7 +123,7 @@ namespace ApplicationDemo.UI
                 {
                     quit = true;
                 }
-                else
+                if ((menuOption != "") && (menuOption.ToUpper() != "E") && (menuOption.ToUpper() != "L") && (menuOption.ToUpper() != "A") && (menuOption.ToUpper() != "V") && (menuOption.ToUpper() != "R") && (menuOption.ToUpper() != "S") && (menuOption.ToUpper() != "M") && (menuOption.ToUpper() != "Q"))
                 {
                     Console.Clear();
                     Console.WriteLine("Invalid Selection, Please try again.");
@@ -153,11 +177,11 @@ namespace ApplicationDemo.UI
             bool nameValid = false;
             while (!nameValid)
             {
-                Console.WriteLine("Name: ");
+                Console.Write("Name: ");
                 newApplicant.Name = Console.ReadLine();
                 if (applicantList.Any(a => a.Name.ToUpper() == newApplicant.Name.ToUpper()) || string.IsNullOrWhiteSpace(newApplicant.Name))
                 {
-                    Console.WriteLine("Invalid Input. Try another name:");
+                    Console.WriteLine("Invalid Input. Try another name.");
                     nameValid = false;
                 }
                 else
@@ -165,13 +189,13 @@ namespace ApplicationDemo.UI
                     nameValid = true;
                 }
             }
-            Console.WriteLine("Address: ");
+            Console.Write("Address: ");
             newApplicant.Address = Console.ReadLine();
-            Console.WriteLine("City: ");
+            Console.Write("City: ");
             newApplicant.City = Console.ReadLine();
-            Console.WriteLine("State: ");
+            Console.Write("State: ");
             newApplicant.State = Console.ReadLine();
-            Console.WriteLine("Zip: ");
+            Console.Write("Zip: ");
             newApplicant.Zip = Console.ReadLine();
             _context.Applicants.Add(newApplicant);
             _context.SaveChanges();
@@ -245,7 +269,7 @@ namespace ApplicationDemo.UI
         /// <summary>
         /// Adds job to Database list
         /// </summary>
-        private static void AddJob()
+        private static void AddJob(string jobString)
         {
             bool quit = false;
             while (!quit)
@@ -253,11 +277,8 @@ namespace ApplicationDemo.UI
                 bool jobValid = false;
                 while (!jobValid)
                 {
-                    Console.Clear();
-                    ViewJobSkills();
-                    Console.WriteLine("Add a job to list: ");
                     JobSkills jobToAdd = new JobSkills();
-                    jobToAdd.SkillName = Console.ReadLine();
+                    jobToAdd.SkillName = jobString;
                     
                     List<JobSkills> addSkill = _context.JobSkills.Where(a => a.SkillName.ToUpper() == jobToAdd.SkillName.ToUpper()).ToList();
 
