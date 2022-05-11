@@ -15,7 +15,7 @@ namespace ApplicationDemo.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Data Source= (localdb)\\MSSQLLocalDb; Initial Catalog=ApplicationDemoData_Final1");
+                "Data Source= (localdb)\\MSSQLLocalDb; Initial Catalog=ApplicationDemoData_Final4");
 
         }
 

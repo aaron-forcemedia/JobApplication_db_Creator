@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationDemo.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220420233459_init_addJobId")]
-    partial class init_addJobId
+    [Migration("20220511202708_final4")]
+    partial class final4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,9 @@ namespace ApplicationDemo.Data.Migrations
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

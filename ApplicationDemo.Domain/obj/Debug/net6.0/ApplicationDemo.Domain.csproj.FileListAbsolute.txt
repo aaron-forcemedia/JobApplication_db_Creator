@@ -37,3 +37,17 @@ C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ref\ApplicationDemo.Domain.dll
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.pdb
 C:\Users\aaron\source\repos\ApplicationDemo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.genruntimeconfig.cache
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.deps.json
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.runtimeconfig.json
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.dll
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\bin\Debug\net6.0\ref\ApplicationDemo.Domain.dll
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\bin\Debug\net6.0\ApplicationDemo.Domain.pdb
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.csproj.AssemblyReference.cache
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.AssemblyInfoInputs.cache
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.AssemblyInfo.cs
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.csproj.CoreCompileInputs.cache
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.dll
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ref\ApplicationDemo.Domain.dll
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.pdb
+C:\Users\aaron\Source\Repos\Application_Demo\ApplicationDemo.Domain\obj\Debug\net6.0\ApplicationDemo.Domain.genruntimeconfig.cache

@@ -82,13 +82,30 @@ namespace ApplicationDemo.UI
                     ListApplicants();
                     if (applications.Count > 0)
                     {
-                        Console.WriteLine("Enter a Name to remove (Or just Press Enter return to menu)");
-                        string removeName = Console.ReadLine();
-                        Console.Clear();
-                        if (removeName != "")
+                        Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
+                        string input = "";
+                        input = Console.ReadLine();
+                        int removeId = 0;
+                        if (input != "")
                         {
-                            RemoveApplicant(removeName.ToUpper());
+                            removeId = int.Parse(input);
                         }
+                        
+                        Console.Clear();
+                        if ((removeId > 0) && (removeId <= applications.Count))
+                        {
+                            RemoveApplicant(removeId);
+                        }
+                        else
+                        {
+                            if (input != "")
+                            {
+                                Console.WriteLine("Not a Valid Selection. Press any key to return to menu");
+                                Console.ReadKey();
+                            }
+                            
+                            Console.Clear();
+                        }       
                     }
                     else
                     {
@@ -107,15 +124,31 @@ namespace ApplicationDemo.UI
                 }
                 if (menuOption.ToUpper() == "M")
                 {
+                    int jobSkillsCount = _context.JobSkills.ToList().Count();
                     Console.Clear();
+                    if (jobSkillsCount == 0)
+                    {
+                        Console.WriteLine("Would you like to add default Job Skills? Enter 'Y' for Yes");
+                        string addDefault = Console.ReadLine();
+                        if (addDefault == "Y")
+                        {
+                            AddDefaultJobSkills();
+                        }
+                    }
                     ViewJobSkills();
-                    Console.WriteLine("Enter a Name to remove or Press Enter to return to Menu");
-                    string removeName = Console.ReadLine();
-                    while (removeName != "")
+                    Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
+                    string input = "";
+                    input = Console.ReadLine();
+                    int removeName = 0;
+                    if (input != "")
+                    {
+                        removeName = int.Parse(input);
+                    }
+                    while (removeName != 0 && _context.JobSkills.Count() > 0)
                     {
                         Console.Clear();
-                        RemoveJob(removeName.ToUpper());
-                        removeName = "";
+                        RemoveJob(removeName);
+                        removeName = 0;
                     }
                     Console.Clear();
                 }
@@ -165,8 +198,10 @@ namespace ApplicationDemo.UI
             foreach (JobSkills job in jobSkillsList)
             {
                 Console.WriteLine($"{i}. {job.SkillName}");
+                job.JobId = i;
                 i++;    
             }
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -263,8 +298,10 @@ namespace ApplicationDemo.UI
             foreach (Applicant application in applications)
             {
                 Console.WriteLine($"{i}. {application.Name}");
+                application.ListId = i;
                 i++;
             }
+            _context.SaveChanges();
             Console.WriteLine("");
         }
 
@@ -313,10 +350,10 @@ namespace ApplicationDemo.UI
         /// Removes JobSkill from Database list
         /// </summary>
         /// <param name="removeName"></param>
-        private static void RemoveJob(string removeName)
+        private static void RemoveJob(int removeName)
         {
             
-            List<JobSkills> remSkill = _context.JobSkills.Where(a => a.SkillName.ToUpper() == removeName).ToList();
+            List<JobSkills> remSkill = _context.JobSkills.Where(a => a.JobId == removeName).ToList();
 
             while (remSkill.Count == 0)
             {
@@ -325,9 +362,16 @@ namespace ApplicationDemo.UI
                 Console.ReadLine();
                 Console.Clear();
                 ViewJobSkills();
-                Console.WriteLine("Enter Job Skill to remove: ");
-                removeName = Console.ReadLine();
-                remSkill = _context.JobSkills.Where(a => a.SkillName.ToUpper() == removeName).ToList();
+                Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
+                string input = "";
+                input = Console.ReadLine();
+                removeName = 0;
+                if (input != "")
+                {
+                    removeName = int.Parse(input);
+                }
+                _context.SaveChanges();
+                remSkill = _context.JobSkills.Where(a => a.JobId == removeName).ToList();
             }
 
             foreach (JobSkills skill in remSkill)
@@ -344,9 +388,9 @@ namespace ApplicationDemo.UI
         /// Removes applicant based on name input
         /// </summary>
         /// <param name="removeName"></param>
-        private static void RemoveApplicant(string removeName)
+        private static void RemoveApplicant(int removeId)
         {
-            List<Applicant> remApplicant = _context.Applicants.Where(a => a.Name.ToUpper() == removeName).ToList();
+            List<Applicant> remApplicant = _context.Applicants.Where(a => a.ListId == removeId).ToList();
             List<Applicant> applications = _context.Applicants.ToList();
 
             while (remApplicant.Count == 0 && applications.Count > 0)
@@ -356,9 +400,9 @@ namespace ApplicationDemo.UI
                 Console.ReadLine();
                 Console.Clear();
                 ListApplicants();
-                Console.WriteLine("Enter Name to remove: ");
-                removeName = Console.ReadLine();
-                remApplicant = _context.Applicants.Where(a => a.Name.ToUpper() == removeName).ToList();
+                Console.WriteLine("Enter number to remove: ");
+                removeId = int.Parse(Console.ReadLine());
+                remApplicant = _context.Applicants.Where(a => a.ListId == removeId).ToList();
             }
 
             foreach (Applicant application in remApplicant)
