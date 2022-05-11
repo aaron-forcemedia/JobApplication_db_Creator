@@ -161,9 +161,11 @@ namespace ApplicationDemo.UI
         {
             List<JobSkills> jobSkillsList = _context.JobSkills.ToList();
             Console.Clear();
+            int i = 1;
             foreach (JobSkills job in jobSkillsList)
             {
-                Console.WriteLine(job.SkillName);
+                Console.WriteLine($"{i}. {job.SkillName}");
+                i++;    
             }
         }
 
@@ -257,12 +259,12 @@ namespace ApplicationDemo.UI
         {
             List<Applicant> applications = _context.Applicants.ToList();
             Console.Clear();
+            int i = 1;
             foreach (Applicant application in applications)
             {
-                Console.WriteLine(application.Name);
+                Console.WriteLine($"{i}. {application.Name}");
+                i++;
             }
-            Console.WriteLine("");
-            ApplicationCount();
             Console.WriteLine("");
         }
 
