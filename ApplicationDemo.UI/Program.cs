@@ -25,9 +25,7 @@ namespace ApplicationDemo.UI
                 string menuOption = "";
                 Console.WriteLine("|   <E>nter Applicant     |");
                 Console.WriteLine("|   <R>emove Applicant    |");
-                Console.WriteLine("|   <L>ist Applicants     |");
                 Console.WriteLine("|   <V>iew Application    |");
-                Console.WriteLine("|   View <S>kills         |");
                 Console.WriteLine("|   <A>dd Skills          |");
                 Console.WriteLine("|   Re<m>ove Skills       |");
                 Console.WriteLine("|   <Q>uit                |");
@@ -37,13 +35,6 @@ namespace ApplicationDemo.UI
                 {
                     Console.Clear();
                     EnterApplicant(dateString);
-                }
-                if (menuOption.ToUpper() == "L")
-                {
-                    ListApplicants();
-                    Console.WriteLine("Press Any Key to continue.");
-                    Console.ReadKey();
-                    Console.Clear();
                 }
                 if (menuOption.ToUpper() == "A")
                 {
@@ -68,14 +59,18 @@ namespace ApplicationDemo.UI
                         int queryId;
                         while (!queryIdIsValid)
                         {
-                            Console.WriteLine("Enter a number to view from the list");
+                            Console.WriteLine("Enter a number to view from the list. Enter 0 to return to menu.");
                             string queryName = Console.ReadLine();                        
 
                             while (!int.TryParse(queryName, out queryId))
                             {
                                 Console.WriteLine("Invalid Input. ");
-                                Console.WriteLine("Enter a number to view from the list.");
+                                Console.WriteLine("Enter a number to view from the list. Enter 0 to return to menu.");
                                 queryName = Console.ReadLine();
+                                /*if (queryName == "0")
+                                {
+                                    queryIdIsValid = true;
+                                }*/
                             }
                             if ((queryId < 0) || (queryId > applications.Count))
                             {
@@ -144,14 +139,6 @@ namespace ApplicationDemo.UI
                         Console.Clear();
                     }
                 }
-                if (menuOption.ToUpper() == "S")
-                {
-                    Console.Clear();
-                    ViewJobSkills();
-                    Console.WriteLine("Press Any Key to return to menu.");
-                    Console.ReadKey();
-                    Console.Clear();
-                }
                 if (menuOption.ToUpper() == "M")
                 {
                     int jobSkillsCount = _context.JobSkills.ToList().Count();
@@ -164,16 +151,22 @@ namespace ApplicationDemo.UI
                         {
                             Console.Clear();
                             AddDefaultJobSkills();
+                            ViewJobSkills();
+                            Console.WriteLine("Press any key to return to menu.");
+                            Console.ReadKey();
+                            Console.Clear();
                         }
                     }
-                    ViewJobSkills();
+                    //ViewJobSkills();
+
                     if (jobSkillsCount > 0)
                     {
                         bool queryIdIsValid = false;
                         int queryId;
                         while (!queryIdIsValid)
                         {
-                            Console.WriteLine("Enter a number to remove from the list. ENTER 0 to exit to Menu");
+                            ViewJobSkills();
+                            Console.WriteLine("Enter a number to remove from the list. Enter 0 to exit to menu.");
                             string queryName = Console.ReadLine();
                             if (queryName.ToUpper() == "0")
                             {
@@ -185,7 +178,7 @@ namespace ApplicationDemo.UI
                                 while (!int.TryParse(queryName, out queryId))
                                 {
                                     Console.WriteLine("Invalid Input. ");
-                                    Console.WriteLine("Enter a number to remove from the list. Enter 0 to exit to Menu");
+                                    Console.WriteLine("Enter a number to remove from the list. Enter 0 to exit to menu.");
                                     queryName = Console.ReadLine();
                                     if (queryName.ToUpper() == "0")
                                     {
@@ -211,7 +204,7 @@ namespace ApplicationDemo.UI
                 {
                     quit = true;
                 }
-                if ((menuOption != "") && (menuOption.ToUpper() != "E") && (menuOption.ToUpper() != "L") && (menuOption.ToUpper() != "A") && (menuOption.ToUpper() != "V") && (menuOption.ToUpper() != "R") && (menuOption.ToUpper() != "S") && (menuOption.ToUpper() != "M") && (menuOption.ToUpper() != "Q"))
+                if ((menuOption != "") && (menuOption.ToUpper() != "E") && (menuOption.ToUpper() != "A") && (menuOption.ToUpper() != "V") && (menuOption.ToUpper() != "R") && (menuOption.ToUpper() != "M") && (menuOption.ToUpper() != "Q"))
                 {
                     Console.Clear();
                     Console.WriteLine("Invalid Selection, Please try again.");
@@ -421,6 +414,7 @@ namespace ApplicationDemo.UI
                 string stringName = skill.SkillName;
                 Console.WriteLine($"{stringName} has been removed. Press Enter to continue");
                 Console.ReadLine();
+                Console.Clear();
                 _context.JobSkills.Remove(skill);
             }
             
