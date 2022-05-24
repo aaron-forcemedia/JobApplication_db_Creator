@@ -103,30 +103,39 @@ namespace ApplicationDemo.UI
                     ListApplicants();
                     if (applications.Count > 0)
                     {
-                        Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
-                        string input = "";
-                        input = Console.ReadLine();
-                        int removeId = 0;
-                        if (input != "")
+                        bool queryIdIsValid = false;
+                        int queryId;
+                        while (!queryIdIsValid)
                         {
-                            removeId = int.Parse(input);
-                        }
-                        
-                        Console.Clear();
-                        if ((removeId > 0) && (removeId <= applications.Count))
-                        {
-                            RemoveApplicant(removeId);
-                        }
-                        else
-                        {
-                            if (input != "")
+                            Console.WriteLine("Enter a number to remove from the list. Enter 0 to return to menu.");
+                            string queryName = Console.ReadLine();
+                            if (queryName == "0")
                             {
-                                Console.WriteLine("Not a Valid Selection. Press any key to return to menu");
-                                Console.ReadKey();
+                                queryIdIsValid = true;
                             }
-                            
-                            Console.Clear();
-                        }       
+
+                            while (!int.TryParse(queryName, out queryId))
+                            {
+                                Console.WriteLine("Invalid Input. ");
+                                Console.WriteLine("Enter a number to remove from the list. Enter 0 to return to menu.");
+                                queryName = Console.ReadLine();
+                                if (queryName == "0")
+                                {
+                                    queryIdIsValid = true;
+                                }
+                            }
+                            if ((queryId < 0) || (queryId > applications.Count))
+                            {
+                                Console.WriteLine("Invalid Input. ");
+                                queryIdIsValid = false;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                RemoveApplicant(queryId);
+                                queryIdIsValid = true;
+                            }
+                        }
                     }
                     else
                     {
@@ -151,27 +160,52 @@ namespace ApplicationDemo.UI
                     {
                         Console.WriteLine("Would you like to add default Job Skills? Enter 'Y' for Yes");
                         string addDefault = Console.ReadLine();
-                        if (addDefault == "Y")
+                        if (addDefault.ToUpper() == "Y")
                         {
+                            Console.Clear();
                             AddDefaultJobSkills();
                         }
                     }
                     ViewJobSkills();
-                    Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
-                    string input = "";
-                    input = Console.ReadLine();
-                    int removeName = 0;
-                    if (input != "")
+                    if (jobSkillsCount > 0)
                     {
-                        removeName = int.Parse(input);
+                        bool queryIdIsValid = false;
+                        int queryId;
+                        while (!queryIdIsValid)
+                        {
+                            Console.WriteLine("Enter a number to remove from the list. ENTER 0 to exit to Menu");
+                            string queryName = Console.ReadLine();
+                            if (queryName.ToUpper() == "0")
+                            {
+                                Console.Clear();
+                                queryIdIsValid = true;
+                            }
+                            else
+                            {
+                                while (!int.TryParse(queryName, out queryId))
+                                {
+                                    Console.WriteLine("Invalid Input. ");
+                                    Console.WriteLine("Enter a number to remove from the list. Enter 0 to exit to Menu");
+                                    queryName = Console.ReadLine();
+                                    if (queryName.ToUpper() == "0")
+                                    {
+                                        queryIdIsValid = true;
+                                    }
+                                }
+                                if ((queryId < 0) || (queryId > jobSkillsCount))
+                                {
+                                    Console.WriteLine("Invalid Input. ");
+                                    queryIdIsValid = false;
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    RemoveJob(queryId);
+                                    queryIdIsValid = true;
+                                }
+                            }
+                        }
                     }
-                    while (removeName != 0 && _context.JobSkills.Count() > 0)
-                    {
-                        Console.Clear();
-                        RemoveJob(removeName);
-                        removeName = 0;
-                    }
-                    Console.Clear();
                 }
                 if (menuOption.ToUpper() == "Q")
                 {
@@ -382,32 +416,14 @@ namespace ApplicationDemo.UI
             
             List<JobSkills> remSkill = _context.JobSkills.Where(a => a.JobId == removeName).ToList();
 
-            while (remSkill.Count == 0)
-            {
-                Console.WriteLine("Invalid Input. Try again.");
-                Console.WriteLine("Press Enter to continue");
-                Console.ReadLine();
-                Console.Clear();
-                ViewJobSkills();
-                Console.WriteLine("Enter a number to remove (Or just Press Enter return to menu)");
-                string input = "";
-                input = Console.ReadLine();
-                removeName = 0;
-                if (input != "")
-                {
-                    removeName = int.Parse(input);
-                }
-                _context.SaveChanges();
-                remSkill = _context.JobSkills.Where(a => a.JobId == removeName).ToList();
-            }
-
             foreach (JobSkills skill in remSkill)
             {
                 string stringName = skill.SkillName;
                 Console.WriteLine($"{stringName} has been removed. Press Enter to continue");
+                Console.ReadLine();
                 _context.JobSkills.Remove(skill);
             }
-            Console.ReadLine();
+            
             _context.SaveChanges();
         }
 
@@ -420,22 +436,11 @@ namespace ApplicationDemo.UI
             List<Applicant> remApplicant = _context.Applicants.Where(a => a.ListId == removeId).ToList();
             List<Applicant> applications = _context.Applicants.ToList();
 
-            while (remApplicant.Count == 0 && applications.Count > 0)
-            {
-                Console.WriteLine("Invalid Input. Try again.");
-                Console.WriteLine("Press Enter to continue");
-                Console.ReadLine();
-                Console.Clear();
-                ListApplicants();
-                Console.WriteLine("Enter number to remove: ");
-                removeId = int.Parse(Console.ReadLine());
-                remApplicant = _context.Applicants.Where(a => a.ListId == removeId).ToList();
-            }
-
             foreach (Applicant application in remApplicant)
             {
                 string stringName = application.Name;
-                Console.WriteLine($"{stringName} has been removed.");
+                Console.WriteLine($"{stringName} has been removed. Press Enter");
+                Console.ReadLine();
 
                 List<ComputerSkills> remComputerSkill = _context.ComputerSkills.Where(a => a.Id == application.Id).ToList();
                 foreach (ComputerSkills remApplication in remComputerSkill)
@@ -446,8 +451,6 @@ namespace ApplicationDemo.UI
             }
 
             _context.SaveChanges();
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
             Console.Clear();
         }
 
