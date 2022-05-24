@@ -64,10 +64,31 @@ namespace ApplicationDemo.UI
                     ListApplicants();
                     if (applications.Count > 0)
                     {
-                        Console.WriteLine("Enter a Name to view");
-                        string queryName = Console.ReadLine();
-                        Console.Clear();
-                        GetInfo(queryName.ToUpper());
+                        bool queryIdIsValid = false;
+                        int queryId;
+                        while (!queryIdIsValid)
+                        {
+                            Console.WriteLine("Enter a number to view from the list");
+                            string queryName = Console.ReadLine();                        
+
+                            while (!int.TryParse(queryName, out queryId))
+                            {
+                                Console.WriteLine("Invalid Input. ");
+                                Console.WriteLine("Enter a number to view from the list.");
+                                queryName = Console.ReadLine();
+                            }
+                            if ((queryId < 0) || (queryId > applications.Count))
+                            {
+                                Console.WriteLine("Invalid Input. ");
+                                queryIdIsValid = false;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                GetInfo(queryId);
+                                queryIdIsValid = true;
+                            }
+                        }
                     }
                     else
                     {
@@ -338,9 +359,15 @@ namespace ApplicationDemo.UI
                 Console.WriteLine("Add another? (Enter N to Exit)");
                 string quitString = "";
                 quitString = Console.ReadLine();
-                if (quitString.ToUpper() == "N")
+                if (quitString.ToUpper() != "N")
                 {
-                    Console.Clear();
+                    Console.Write("Enter the Job to add: ");
+                    jobString = Console.ReadLine();
+                    AddJob(jobString);
+                }
+                else
+                {
+                    jobValid = true;
                     quit = true;
                 }
             }                         
@@ -428,9 +455,9 @@ namespace ApplicationDemo.UI
         /// Retrieves applicant information from inputed name
         /// </summary>
         /// <param name="queryName"></param>
-        private static void GetInfo(string queryName)
+        private static void GetInfo(int queryId)
         {
-            List<Applicant> applicant = _context.Applicants.Where(a => a.Name.ToUpper() == queryName).ToList();
+            List<Applicant> applicant = _context.Applicants.Where(a => a.ListId == queryId).ToList();
             foreach (Applicant app in applicant)
             {
                 Console.WriteLine(app.Name);
