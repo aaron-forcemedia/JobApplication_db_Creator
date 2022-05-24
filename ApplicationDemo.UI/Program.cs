@@ -41,9 +41,9 @@ namespace ApplicationDemo.UI
                     Console.Clear();
                     ViewJobSkills();
                     Console.WriteLine();
-                    Console.WriteLine("Add a job to list (Or just Press Enter to Exit to menu): ");
+                    Console.WriteLine("Add a job to list (Or just enter 0 to Exit to menu): ");
                     string jobString = Console.ReadLine();
-                    if (jobString != "")
+                    if (jobString != "0")
                     {
                         AddJob(jobString);
                     }
@@ -362,17 +362,16 @@ namespace ApplicationDemo.UI
             while (!quit)
             {
                 bool jobValid = false;
+                JobSkills jobToAdd = new JobSkills();
+                jobToAdd.SkillName = jobString;
                 while (!jobValid)
                 {
-                    JobSkills jobToAdd = new JobSkills();
-                    jobToAdd.SkillName = jobString;
-                    
                     List<JobSkills> addSkill = _context.JobSkills.Where(a => a.SkillName.ToUpper() == jobToAdd.SkillName.ToUpper()).ToList();
 
                     if (addSkill.Count > 0 || string.IsNullOrWhiteSpace(jobToAdd.SkillName))
                     {
-                        Console.WriteLine("Name already exists or Invalid. Press Enter to continue..");
-                        Console.ReadLine();
+                        Console.WriteLine("Name already exists or Invalid. Please enter a name not already in use.");
+                        jobToAdd.SkillName = Console.ReadLine();
                         jobValid = false;
                     }
                     else
@@ -383,10 +382,10 @@ namespace ApplicationDemo.UI
                         jobValid = true;
                     }
                 }
-                Console.WriteLine("Add another? (Enter N to Exit)");
+                Console.WriteLine("Add another? (Enter Y for Yes or any other key to Exit)");
                 string quitString = "";
                 quitString = Console.ReadLine();
-                if (quitString.ToUpper() != "N")
+                if (quitString.ToUpper() == "Y")
                 {
                     Console.Write("Enter the Job to add: ");
                     jobString = Console.ReadLine();
